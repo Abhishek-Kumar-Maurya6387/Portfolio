@@ -44,17 +44,14 @@ button { color:inherit; }
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  /* Start at top — home page first */
   scroll-padding-top: 0;
 }
 
-/* Hero MUST be first snap point */
 #home {
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
 
-/* All sections snap */
 section {
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -67,35 +64,49 @@ section {
 
 /* ── CUSTOM CURSOR ──────────────────────────────────────────── */
 .cursor-dot,
-.cursor-ring,
-.cursor-trail {
+.cursor-ring {
   pointer-events: none;
   position: fixed;
   transform: translate(-50%, -50%);
   z-index: 10000;
 }
+
 .cursor-dot {
   background: var(--teal-bright);
   border-radius: 50%;
   box-shadow: 0 0 16px rgba(0,128,128,0.9);
-  height: 8px; width: 8px;
+  height: 8px;
+  width: 8px;
 }
+
 .cursor-ring {
   border: 1.5px solid rgba(0,109,109,0.72);
   border-radius: 50%;
-  height: 36px; width: 36px;
+  height: 36px;
+  width: 36px;
   transition: height 180ms ease, width 180ms ease, border-color 180ms ease;
 }
+
 .cursor-dot.hovering  { height:14px; width:14px; }
 .cursor-ring.hovering { border-color:#006D6D; height:56px; width:56px; }
+
+/* Trail — completely separate, all required properties */
 .cursor-trail {
   animation: trail-fade 560ms ease forwards;
-  background: rgba(0,109,109,0.55);
+  background: rgba(0, 109, 109, 0.6);
   border-radius: 50%;
-  height: 4px; width: 4px;
+  box-shadow: 0 0 6px rgba(0, 109, 109, 0.45);
+  height: 5px;
+  width: 5px;
+  pointer-events: none;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
 }
+
 @keyframes trail-fade {
-  to { opacity:0; transform:translate(-50%,-50%) scale(0.2); }
+  0%   { opacity: 0.75; transform: translate(-50%, -50%) scale(1);   }
+  100% { opacity: 0;    transform: translate(-50%, -50%) scale(0.1); }
 }
 
 /* ── SELECTION ──────────────────────────────────────────────── */
@@ -118,7 +129,6 @@ section {
   z-index: 9000;
 }
 .intro-mark {
-  /* colour overridden inline — teal */
   font-family: var(--display);
   font-size: 5rem;
   font-weight: 800;
@@ -139,7 +149,8 @@ section {
 .console-caret {
   animation: blink 700ms steps(2,jump-none) infinite;
   background: var(--teal-ink);
-  height: 18px; width: 8px;
+  height: 18px;
+  width: 8px;
 }
 @keyframes blink { 50% { opacity:0; } }
 
@@ -179,7 +190,6 @@ section {
 }
 .nav-links button.active,
 .nav-links button:hover { color: var(--teal-ink); }
-
 .menu-toggle {
   align-items: center; color: var(--white);
   display: none; font-size: 1.45rem;
@@ -392,7 +402,7 @@ section {
 .achievement-issuer { color:var(--teal-ink); font-size:0.92rem; margin-bottom:14px; }
 .achievement-copy { color:var(--text-soft); line-height:1.7; margin-bottom:20px; }
 
-/* ── TIMELINE (Experience/Internship) ────────────────────────── */
+/* ── TIMELINE ────────────────────────────────────────────────── */
 .timeline { position:relative; }
 .timeline::before {
   background:linear-gradient(var(--teal-bright),rgba(0,109,109,0.04));
